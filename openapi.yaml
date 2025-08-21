@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  title: Website Steward Actions
+  version: "1.0.0"
+servers:
+  - url: https://YOUR-VERCEL-APP.vercel.app/api
+paths:
+  /psi:
+    get:
+      summary: PageSpeed Insights snapshot (Core Web Vitals + Lighthouse)
+      parameters:
+        - in: query
+          name: url
+          required: true
+          schema: { type: string }
+        - in: query
+          name: strategy
+          required: false
+          schema:
+            type: string
+            enum: [mobile, desktop]
+            default: mobile
+      responses:
+        "200":
+          description: PSI JSON returned by Google API
+  /onpage:
+    get:
+      summary: Lightweight on-page HTML audit
+      parameters:
+        - in: query
+          name: url
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Basic SEO/accessibility findings
